@@ -1,10 +1,12 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
 {
-  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.01';
+  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.02';
 }
 BEGIN {
   $Dist::Zilla::PluginBundle::DROLSKY::AUTHORITY = 'cpan:DROLSKY';
 }
+
+use v5.10;
 
 use strict;
 use warnings;
@@ -31,6 +33,12 @@ has authority => (
     is      => 'ro',
     isa     => 'Str',
     default => 'DROLSKY',
+);
+
+has prereqs_skip => (
+    is       => 'ro',
+    isa      => 'ArrayRef[Str]',
+    required => 1,
 );
 
 has stopwords => (
@@ -136,10 +144,12 @@ around BUILDARGS => sub {
 
     my %args = ( %{ $p->{payload} }, %{$p} );
 
-    if ( $args{stopwords} && !ref $args{stopwords} ) {
-        $args{stopwords} = [ delete $args{stopwords} ];
+    for my $key ( qw(  prereqs_skip stopwords ) ) {
+        if ( $args{$key} && !ref $args{$key} ) {
+            $args{$key} = [ delete $args{$key} ];
+        }
+        $args{$key} //= [];
     }
-    $args{stopwords} //= [];
 
     push @{ $args{stopwords} }, $class->_default_stopwords();
 
@@ -169,7 +179,7 @@ sub configure {
     );
 
     $self->add_plugins( map { [ $_ => $self->_plugin_options_for($_) ] }
-            @{ $self->_plugins }, );
+            @{ $self->_plugins } );
 
     return;
 }
@@ -179,6 +189,7 @@ sub _build_plugin_options {
 
     return {
         Authority => { authority => 'cpan:' . $self->authority() },
+        AutoPrereqs => { skip => $self->prereqs_skip() },
         MetaResources => $self->_meta_resources(),
         NextRelease   => {
             format => '%-' . $self->next_release_width() . 'v %{yyyy-MM-dd}d'
@@ -221,7 +232,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =for Pod::Coverage configure
 
