@@ -1,4 +1,12 @@
+0.03     2013-06-07
+
+- Allow multiple prereqs_skip and stopwords properties
+
+
 0.02     2013-05-13
+
+- Allow prereqs_skip option to be passed to AutoPrereqs
+
 
 0.01     2013-04-21
 

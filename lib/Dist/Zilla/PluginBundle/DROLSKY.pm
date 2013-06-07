@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
 {
-  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.02';
+  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.03';
 }
 BEGIN {
   $Dist::Zilla::PluginBundle::DROLSKY::AUTHORITY = 'cpan:DROLSKY';
@@ -72,6 +72,11 @@ has _plugin_options => (
         __plugin_options_for => 'get',
     },
 );
+
+
+sub mvp_multivalue_args {
+    return qw( prereqs_skip stopwords );
+}
 
 sub _plugin_options_for {
     $_[0]->__plugin_options_for( $_[1] ) // {};
@@ -232,7 +237,9 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.02
+version 0.03
+
+=for Pod::Coverage   mvp_multivalue_args
 
 =for Pod::Coverage configure
 
