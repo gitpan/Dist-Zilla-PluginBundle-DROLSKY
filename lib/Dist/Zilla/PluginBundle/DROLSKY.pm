@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
 {
-  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.04';
+  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.05';
 }
 BEGIN {
   $Dist::Zilla::PluginBundle::DROLSKY::AUTHORITY = 'cpan:DROLSKY';
@@ -117,9 +117,11 @@ sub _build_plugins {
         qw(
             Authority
             AutoPrereqs
+            ContributorsFromGit
             CopyReadmeFromBuild
             CheckPrereqsIndexed
             InstallGuide
+            Meta::Contributors
             MetaJSON
             MetaResources
             NextRelease
@@ -247,7 +249,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =for Pod::Coverage   mvp_multivalue_args
 

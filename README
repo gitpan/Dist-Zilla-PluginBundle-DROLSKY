@@ -1,14 +1,16 @@
+NAME
+    Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
+VERSION
+    version 0.05
 
-This archive contains the distribution Dist-Zilla-PluginBundle-DROLSKY,
-version 0.04:
+AUTHOR
+    Dave Rolsky <autarch@urth.org>
 
-  DROLSKY's plugin bundle
+COPYRIGHT AND LICENSE
+    This software is Copyright (c) 2013 by Dave Rolsky.
 
-This software is Copyright (c) 2013 by Dave Rolsky.
+    This is free software, licensed under:
 
-This is free software, licensed under:
-
-  The Artistic License 2.0 (GPL Compatible)
-
+      The Artistic License 2.0 (GPL Compatible)
 
