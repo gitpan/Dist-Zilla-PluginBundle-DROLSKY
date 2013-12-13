@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
 {
-  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.03';
+  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.04';
 }
 BEGIN {
   $Dist::Zilla::PluginBundle::DROLSKY::AUTHORITY = 'cpan:DROLSKY';
@@ -53,6 +53,12 @@ has next_release_width => (
     default => 8,
 );
 
+has remove => (
+    is      => 'ro',
+    isa     => 'ArrayRef[Str]',
+    default => sub { [] },
+);
+
 has _plugins => (
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
@@ -75,7 +81,7 @@ has _plugin_options => (
 
 
 sub mvp_multivalue_args {
-    return qw( prereqs_skip stopwords );
+    return qw( prereqs_skip remove stopwords );
 }
 
 sub _plugin_options_for {
@@ -85,8 +91,9 @@ sub _plugin_options_for {
 sub _build_plugins {
     my $self = shift;
 
+    my %remove = map { $_ => 1 } @{ $self->remove() };
     return [
-        $self->make_tool(),
+        grep { !$remove{$_} } $self->make_tool(),
 
         # from @Basic
         qw(
@@ -110,12 +117,14 @@ sub _build_plugins {
         qw(
             Authority
             AutoPrereqs
+            CopyReadmeFromBuild
             CheckPrereqsIndexed
             InstallGuide
             MetaJSON
             MetaResources
             NextRelease
             PkgVersion
+            ReadmeFromPod
             SurgicalPodWeaver
             ),
 
@@ -129,6 +138,7 @@ sub _build_plugins {
             Test::Pod::LinkCheck
             Test::Pod::No404s
             Test::PodSpelling
+            Test::Synopsis
             ),
 
         # from @Git
@@ -149,7 +159,7 @@ around BUILDARGS => sub {
 
     my %args = ( %{ $p->{payload} }, %{$p} );
 
-    for my $key ( qw(  prereqs_skip stopwords ) ) {
+    for my $key (qw(  prereqs_skip stopwords )) {
         if ( $args{$key} && !ref $args{$key} ) {
             $args{$key} = [ delete $args{$key} ];
         }
@@ -193,8 +203,8 @@ sub _build_plugin_options {
     my $self = shift;
 
     return {
-        Authority => { authority => 'cpan:' . $self->authority() },
-        AutoPrereqs => { skip => $self->prereqs_skip() },
+        Authority   => { authority => 'cpan:' . $self->authority() },
+        AutoPrereqs => { skip      => $self->prereqs_skip() },
         MetaResources => $self->_meta_resources(),
         NextRelease   => {
             format => '%-' . $self->next_release_width() . 'v %{yyyy-MM-dd}d'
@@ -237,7 +247,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =for Pod::Coverage   mvp_multivalue_args
 
