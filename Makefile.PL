@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla" => 0,
     "Dist::Zilla::Role::PluginBundle::Easy" => 0,
     "Moose" => 0,
+    "Pod::Weaver::Section::Contributors" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -32,7 +33,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.06",
+  "VERSION" => "0.07",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -45,6 +46,7 @@ my %FallbackPrereqs = (
   "File::Find" => 0,
   "File::Temp" => 0,
   "Moose" => 0,
+  "Pod::Weaver::Section::Contributors" => 0,
   "Test::More" => "0.88",
   "strict" => 0,
   "warnings" => 0

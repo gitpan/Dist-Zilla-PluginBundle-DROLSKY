@@ -1,11 +1,13 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.06';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.07';
 use v5.10;
 
 use strict;
 use warnings;
 
 use Dist::Zilla;
+# Not used here, but we want it installed
+use Pod::Weaver::Section::Contributors;
 
 use Moose;
 
@@ -27,6 +29,12 @@ has authority => (
     is      => 'ro',
     isa     => 'Str',
     default => 'DROLSKY',
+);
+
+has prune_files => (
+    is       => 'ro',
+    isa      => 'ArrayRef[Str]',
+    required => 1,
 );
 
 has prereqs_skip => (
@@ -75,7 +83,7 @@ has _plugin_options => (
 
 
 sub mvp_multivalue_args {
-    return qw( prereqs_skip remove stopwords );
+    return qw( prune_files prereqs_skip remove stopwords );
 }
 
 sub _plugin_options_for {
@@ -120,6 +128,7 @@ sub _build_plugins {
             MetaResources
             NextRelease
             PkgVersion
+            PruneFiles
             ReadmeFromPod
             SurgicalPodWeaver
             ),
@@ -155,7 +164,7 @@ around BUILDARGS => sub {
 
     my %args = ( %{ $p->{payload} }, %{$p} );
 
-    for my $key (qw(  prereqs_skip stopwords )) {
+    for my $key (qw( prune_files prereqs_skip stopwords )) {
         if ( $args{$key} && !ref $args{$key} ) {
             $args{$key} = [ delete $args{$key} ];
         }
@@ -198,15 +207,21 @@ sub configure {
 sub _build_plugin_options {
     my $self = shift;
 
+    my @allow_dirty = qw( Changes README );
     return {
         Authority => {
             authority  => 'cpan:' . $self->authority(),
             do_munging => 0,
         },
-        AutoPrereqs   => { skip => $self->prereqs_skip() },
+        AutoPrereqs   => { skip        => $self->prereqs_skip() },
+        'Git::Check'  => { allow_dirty => \@allow_dirty },
+        'Git::Commit' => { allow_dirty => \@allow_dirty },
         MetaResources => $self->_meta_resources(),
         NextRelease   => {
             format => '%-' . $self->next_release_width() . 'v %{yyyy-MM-dd}d'
+        },
+        PruneFiles => {
+            filename => [ qw( README ), @{ $self->prune_files() } ],
         },
         'Test::PodSpelling' => { stopwords => $self->stopwords() },
     };
@@ -246,7 +261,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =for Pod::Coverage   mvp_multivalue_args
 
