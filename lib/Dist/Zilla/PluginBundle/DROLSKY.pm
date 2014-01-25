@@ -1,11 +1,5 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-{
-  $Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.05';
-}
-BEGIN {
-  $Dist::Zilla::PluginBundle::DROLSKY::AUTHORITY = 'cpan:DROLSKY';
-}
-
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.06';
 use v5.10;
 
 use strict;
@@ -205,8 +199,11 @@ sub _build_plugin_options {
     my $self = shift;
 
     return {
-        Authority   => { authority => 'cpan:' . $self->authority() },
-        AutoPrereqs => { skip      => $self->prereqs_skip() },
+        Authority => {
+            authority  => 'cpan:' . $self->authority(),
+            do_munging => 0,
+        },
+        AutoPrereqs   => { skip => $self->prereqs_skip() },
         MetaResources => $self->_meta_resources(),
         NextRelease   => {
             format => '%-' . $self->next_release_width() . 'v %{yyyy-MM-dd}d'
@@ -249,7 +246,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =for Pod::Coverage   mvp_multivalue_args
 
@@ -261,7 +258,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Dave Rolsky.
+This software is Copyright (c) 2014 by Dave Rolsky.
 
 This is free software, licensed under:
 
