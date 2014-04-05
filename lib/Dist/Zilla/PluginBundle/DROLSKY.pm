@@ -1,13 +1,44 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.07';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.08';
 use v5.10;
 
 use strict;
 use warnings;
 
 use Dist::Zilla;
+
 # Not used here, but we want it installed
 use Pod::Weaver::Section::Contributors;
+
+# For the benefit of AutoPrereqs
+use Dist::Zilla::Plugin::Authority;
+use Dist::Zilla::Plugin::AutoPrereqs;
+use Dist::Zilla::Plugin::ContributorsFromGit;
+use Dist::Zilla::Plugin::CopyReadmeFromBuild;
+use Dist::Zilla::Plugin::CheckPrereqsIndexed;
+use Dist::Zilla::Plugin::InstallGuide;
+use Dist::Zilla::Plugin::Meta::Contributors;
+use Dist::Zilla::Plugin::MetaJSON;
+use Dist::Zilla::Plugin::MetaResources;
+use Dist::Zilla::Plugin::NextRelease;
+use Dist::Zilla::Plugin::PkgVersion;
+use Dist::Zilla::Plugin::PruneFiles;
+use Dist::Zilla::Plugin::ReadmeFromPod;
+use Dist::Zilla::Plugin::SurgicalPodWeaver;
+use Dist::Zilla::Plugin::EOLTests;
+use Dist::Zilla::Plugin::NoTabsTests;
+use Dist::Zilla::Plugin::PodCoverageTests;
+use Dist::Zilla::Plugin::PodSyntaxTests;
+use Dist::Zilla::Plugin::Test::CPAN::Changes;
+use Dist::Zilla::Plugin::Test::Compile;
+use Dist::Zilla::Plugin::Test::Pod::LinkCheck;
+use Dist::Zilla::Plugin::Test::Pod::No404s;
+use Dist::Zilla::Plugin::Test::PodSpelling;
+use Dist::Zilla::Plugin::Test::Synopsis;
+use Dist::Zilla::Plugin::Git::Check;
+use Dist::Zilla::Plugin::Git::Commit;
+use Dist::Zilla::Plugin::Git::Tag;
+use Dist::Zilla::Plugin::Git::Push;
 
 use Moose;
 
@@ -38,15 +69,23 @@ has prune_files => (
 );
 
 has prereqs_skip => (
+    traits   => ['Array'],
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
     required => 1,
+    handles  => {
+        _has_prereqs_skip => 'count',
+    },
 );
 
 has stopwords => (
+    traits   => ['Array'],
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
     required => 1,
+    handles  => {
+        _has_stopwords => 'count',
+    },
 );
 
 has next_release_width => (
@@ -213,7 +252,12 @@ sub _build_plugin_options {
             authority  => 'cpan:' . $self->authority(),
             do_munging => 0,
         },
-        AutoPrereqs   => { skip        => $self->prereqs_skip() },
+        AutoPrereqs => {
+            (
+                $self->_has_prereqs_skip() ? ( skip => $self->prereqs_skip() )
+                : ()
+            )
+        },
         'Git::Check'  => { allow_dirty => \@allow_dirty },
         'Git::Commit' => { allow_dirty => \@allow_dirty },
         MetaResources => $self->_meta_resources(),
@@ -223,7 +267,12 @@ sub _build_plugin_options {
         PruneFiles => {
             filename => [ qw( README ), @{ $self->prune_files() } ],
         },
-        'Test::PodSpelling' => { stopwords => $self->stopwords() },
+        'Test::PodSpelling' => {
+            (
+                $self->_has_stopwords() ? ( stopwords => $self->stopwords() )
+                : ()
+            ),
+        },
     };
 }
 
@@ -261,7 +310,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =for Pod::Coverage   mvp_multivalue_args
 
