@@ -1,5 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.09';
+# git description: v0.09-5-g1ea6123
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.10';
+
 use v5.10;
 
 use strict;
@@ -18,19 +20,26 @@ use Dist::Zilla::Plugin::ContributorsFromGit;
 use Dist::Zilla::Plugin::CopyReadmeFromBuild;
 use Dist::Zilla::Plugin::EOLTests;
 use Dist::Zilla::Plugin::Git::Check;
+use Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts;
 use Dist::Zilla::Plugin::Git::Commit;
+use Dist::Zilla::Plugin::Git::Describe;
 use Dist::Zilla::Plugin::Git::Push;
 use Dist::Zilla::Plugin::Git::Tag;
+use Dist::Zilla::Plugin::GitHub::Meta;
 use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::Meta::Contributors;
+use Dist::Zilla::Plugin::MetaConfig;
 use Dist::Zilla::Plugin::MetaJSON;
+use Dist::Zilla::Plugin::MetaProvides::Package;
 use Dist::Zilla::Plugin::MetaResources;
+use Dist::Zilla::Plugin::MojibakeTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
+use Dist::Zilla::Plugin::PromptIfStale;
 use Dist::Zilla::Plugin::PruneFiles;
-use Dist::Zilla::Plugin::ReadmeFromPod;
+use Dist::Zilla::Plugin::ReadmeAnyFromPod;
 use Dist::Zilla::Plugin::SurgicalPodWeaver;
 use Dist::Zilla::Plugin::Test::CPAN::Changes;
 use Dist::Zilla::Plugin::Test::Compile;
@@ -38,11 +47,16 @@ use Dist::Zilla::Plugin::Test::NoTabs;
 use Dist::Zilla::Plugin::Test::Pod::LinkCheck;
 use Dist::Zilla::Plugin::Test::Pod::No404s;
 use Dist::Zilla::Plugin::Test::PodSpelling;
+use Dist::Zilla::Plugin::Test::Portability;
+use Dist::Zilla::Plugin::Test::ReportPrereqs;
 use Dist::Zilla::Plugin::Test::Synopsis;
+
+
 
 use Moose;
 
-with 'Dist::Zilla::Role::PluginBundle::Easy';
+with 'Dist::Zilla::Role::PluginBundle::Easy',
+    'Dist::Zilla::Role::PluginBundle::PluginRemover';
 
 has dist => (
     is       => 'ro',
@@ -143,7 +157,6 @@ sub _build_plugins {
             ManifestSkip
             MetaYAML
             License
-            Readme
             ExtraTests
             ExecDir
             ShareDir
@@ -158,17 +171,22 @@ sub _build_plugins {
         qw(
             Authority
             AutoPrereqs
+            CheckPrereqsIndexed
             ContributorsFromGit
             CopyReadmeFromBuild
-            CheckPrereqsIndexed
+            Git::CheckFor::CorrectBranch
+            Git::CheckFor::MergeConflicts
+            Git::Describe
+            GitHub::Meta
             InstallGuide
             Meta::Contributors
+            MetaConfig
             MetaJSON
+            MetaProvides::Package
             MetaResources
             NextRelease
             PkgVersion
             PruneFiles
-            ReadmeFromPod
             SurgicalPodWeaver
             ),
 
@@ -182,6 +200,8 @@ sub _build_plugins {
             Test::Pod::LinkCheck
             Test::Pod::No404s
             Test::PodSpelling
+            Test::Portability
+            Test::ReportPrereqs
             Test::Synopsis
             ),
 
@@ -234,7 +254,24 @@ sub configure {
                 -type        => 'requires',
                 'Test::More' => '0.88',
             }
-        ]
+        ],
+        [
+            'PromptIfStale' => 'stale modules, release' => {
+                phase             => 'release',
+                check_all_plugins => 1,
+                check_all_prereqs => 1,
+            }
+        ],
+        [
+            'ReadmeAnyFromPod' => 'ReadmeMarkdownInBuild' => {
+                filename => 'README.md',
+            },
+        ],
+        [
+            'ReadmeAnyFromPod' => 'ReadmeMarkdownInRoot' => {
+                filename => 'README.md',
+            },
+        ],
     );
 
     $self->add_plugins( map { [ $_ => $self->_plugin_options_for($_) ] }
@@ -246,8 +283,8 @@ sub configure {
 sub _build_plugin_options {
     my $self = shift;
 
-    my @allow_dirty = qw( Changes README );
-    return {
+    my @allow_dirty = qw( Changes CONTRIBUTING.md README.md );
+    my %options     = (
         Authority => {
             authority  => 'cpan:' . $self->authority(),
             do_munging => 0,
@@ -258,14 +295,14 @@ sub _build_plugin_options {
                 : ()
             )
         },
-        'Git::Check'  => { allow_dirty => \@allow_dirty },
-        'Git::Commit' => { allow_dirty => \@allow_dirty },
-        MetaResources => $self->_meta_resources(),
-        NextRelease   => {
+        GatherDir               => { exclude_filename => 'README.md' },
+        'Git::Check'            => { allow_dirty      => \@allow_dirty },
+        'Git::Commit'           => { allow_dirty      => \@allow_dirty },
+        'GitHub::Meta'          => { bugs             => 0 },
+        MetaResources           => $self->_meta_resources(),
+        'MetaProvides::Package' => { meta_noindex     => 1 },
+        NextRelease             => {
             format => '%-' . $self->next_release_width() . 'v %{yyyy-MM-dd}d'
-        },
-        PruneFiles => {
-            filename => [ qw( README ), @{ $self->prune_files() } ],
         },
         'Test::PodSpelling' => {
             (
@@ -273,18 +310,18 @@ sub _build_plugin_options {
                 : ()
             ),
         },
-    };
+        'Test::ReportPrereqs' => { verify_prereqs => 1 },
+    );
+    $options{PruneFiles}{filename} = $self->prune_files()
+        if @{ $self->prune_files() };
+
+    return \%options;
 }
 
 sub _meta_resources {
     my $self = shift;
 
     return {
-        'repository.type' => 'git',
-        'repository.url' =>
-            sprintf( 'git://git.urth.org/%s.git', $self->dist() ),
-        'repository.web' =>
-            sprintf( 'http://git.urth.org/%s.git', $self->dist() ),
         'bugtracker.web' => sprintf(
             'http://rt.cpan.org/Public/Dist/Display.html?Name=%s',
             $self->dist()
@@ -304,13 +341,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =for Pod::Coverage   mvp_multivalue_args
 

@@ -9,7 +9,7 @@ BEGIN {
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::NoTabsTests 0.07
+# this test was generated with Dist::Zilla::Plugin::Test::NoTabs 0.08
 
 use Test::More 0.88;
 use Test::NoTabs;
@@ -17,6 +17,8 @@ use Test::NoTabs;
 my @files = (
     'lib/Dist/Zilla/PluginBundle/DROLSKY.pm',
     't/00-compile.t',
+    't/00-report-prereqs.dd',
+    't/00-report-prereqs.t',
     't/author-pod-spell.t',
     't/release-cpan-changes.t',
     't/release-eol.t',
@@ -25,6 +27,7 @@ my @files = (
     't/release-pod-linkcheck.t',
     't/release-pod-no404s.t',
     't/release-pod-syntax.t',
+    't/release-portability.t',
     't/release-synopsis.t'
 );
 
