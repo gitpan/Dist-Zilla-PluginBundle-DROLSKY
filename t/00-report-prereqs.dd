@@ -31,6 +31,7 @@ do { my $x = {
                                       'Dist::Zilla::Plugin::Git::Push' => '0',
                                       'Dist::Zilla::Plugin::Git::Tag' => '0',
                                       'Dist::Zilla::Plugin::GitHub::Meta' => '0',
+                                      'Dist::Zilla::Plugin::GitHub::Update' => '0',
                                       'Dist::Zilla::Plugin::InstallGuide' => '0',
                                       'Dist::Zilla::Plugin::Meta::Contributors' => '0',
                                       'Dist::Zilla::Plugin::MetaConfig' => '0',

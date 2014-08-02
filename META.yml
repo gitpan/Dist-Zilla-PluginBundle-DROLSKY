@@ -20,7 +20,7 @@ name: Dist-Zilla-PluginBundle-DROLSKY
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.10'
+    version: '0.11'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::Plugin::Authority: '0'
@@ -36,6 +36,7 @@ requires:
   Dist::Zilla::Plugin::Git::Push: '0'
   Dist::Zilla::Plugin::Git::Tag: '0'
   Dist::Zilla::Plugin::GitHub::Meta: '0'
+  Dist::Zilla::Plugin::GitHub::Update: '0'
   Dist::Zilla::Plugin::InstallGuide: '0'
   Dist::Zilla::Plugin::Meta::Contributors: '0'
   Dist::Zilla::Plugin::MetaConfig: '0'
@@ -71,7 +72,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.10'
+version: '0.11'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -199,6 +200,10 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GitHub::Meta
       name: '@DROLSKY/GitHub::Meta'
+      version: '0.38'
+    -
+      class: Dist::Zilla::Plugin::GitHub::Update
+      name: '@DROLSKY/GitHub::Update'
       version: '0.38'
     -
       class: Dist::Zilla::Plugin::InstallGuide
@@ -422,7 +427,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.10
+          tag: v0.11
           tag_format: v%v
           tag_message: v%v
           time_zone: local

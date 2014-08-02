@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.09-5-g1ea6123
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.10';
+# git description: v0.10-2-gb2f6278
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.11';
 
 use v5.10;
 
@@ -26,6 +26,7 @@ use Dist::Zilla::Plugin::Git::Describe;
 use Dist::Zilla::Plugin::Git::Push;
 use Dist::Zilla::Plugin::Git::Tag;
 use Dist::Zilla::Plugin::GitHub::Meta;
+use Dist::Zilla::Plugin::GitHub::Update;
 use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::Meta::Contributors;
 use Dist::Zilla::Plugin::MetaConfig;
@@ -178,6 +179,7 @@ sub _build_plugins {
             Git::CheckFor::MergeConflicts
             Git::Describe
             GitHub::Meta
+            GitHub::Update
             InstallGuide
             Meta::Contributors
             MetaConfig
@@ -299,6 +301,7 @@ sub _build_plugin_options {
         'Git::Check'            => { allow_dirty      => \@allow_dirty },
         'Git::Commit'           => { allow_dirty      => \@allow_dirty },
         'GitHub::Meta'          => { bugs             => 0 },
+        'GitHub::Update'        => { metacpan         => 1 },
         MetaResources           => $self->_meta_resources(),
         'MetaProvides::Package' => { meta_noindex     => 1 },
         NextRelease             => {
@@ -349,7 +352,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =for Pod::Coverage   mvp_multivalue_args
 
