@@ -12,7 +12,8 @@ do { my $x = {
                                       'Test::NoTabs' => '0',
                                       'Test::Pod' => '1.41',
                                       'Test::Pod::Coverage' => '1.08',
-                                      'Test::Spelling' => '0.12'
+                                      'Test::Spelling' => '0.12',
+                                      'Test::Synopsis' => '0'
                                     }
                     },
        'runtime' => {
@@ -50,6 +51,7 @@ do { my $x = {
                                       'Dist::Zilla::Plugin::Test::CPAN::Changes' => '0',
                                       'Dist::Zilla::Plugin::Test::Compile' => '0',
                                       'Dist::Zilla::Plugin::Test::NoTabs' => '0',
+                                      'Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable' => '0',
                                       'Dist::Zilla::Plugin::Test::Pod::LinkCheck' => '0',
                                       'Dist::Zilla::Plugin::Test::Pod::No404s' => '0',
                                       'Dist::Zilla::Plugin::Test::PodSpelling' => '0',
@@ -60,6 +62,7 @@ do { my $x = {
                                       'Dist::Zilla::Role::PluginBundle::PluginRemover' => '0',
                                       'Moose' => '0',
                                       'Pod::Weaver::Section::Contributors' => '0',
+                                      'autodie' => '0',
                                       'perl' => 'v5.10.0',
                                       'strict' => '0',
                                       'warnings' => '0'

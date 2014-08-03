@@ -20,7 +20,7 @@ name: Dist-Zilla-PluginBundle-DROLSKY
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.11'
+    version: '0.12'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::Plugin::Authority: '0'
@@ -55,6 +55,7 @@ requires:
   Dist::Zilla::Plugin::Test::CPAN::Changes: '0'
   Dist::Zilla::Plugin::Test::Compile: '0'
   Dist::Zilla::Plugin::Test::NoTabs: '0'
+  Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable: '0'
   Dist::Zilla::Plugin::Test::Pod::LinkCheck: '0'
   Dist::Zilla::Plugin::Test::Pod::No404s: '0'
   Dist::Zilla::Plugin::Test::PodSpelling: '0'
@@ -65,6 +66,7 @@ requires:
   Dist::Zilla::Role::PluginBundle::PluginRemover: '0'
   Moose: '0'
   Pod::Weaver::Section::Contributors: '0'
+  autodie: '0'
   perl: v5.10.0
   strict: '0'
   warnings: '0'
@@ -72,7 +74,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.11'
+version: '0.12'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -352,7 +354,7 @@ x_Dist_Zilla:
           script_finder:
             - ':ExecFiles'
       name: '@DROLSKY/Test::Compile'
-      version: '2.043'
+      version: '2.044'
     -
       class: Dist::Zilla::Plugin::Test::NoTabs
       config:
@@ -386,7 +388,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::Synopsis
       name: '@DROLSKY/Test::Synopsis'
-      version: '2.000004'
+      version: '2.000005'
     -
       class: Dist::Zilla::Plugin::Git::Check
       config:
@@ -427,7 +429,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.11
+          tag: v0.12
           tag_format: v%v
           tag_message: v%v
           time_zone: local

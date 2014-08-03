@@ -53,6 +53,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::Test::CPAN::Changes" => 0,
     "Dist::Zilla::Plugin::Test::Compile" => 0,
     "Dist::Zilla::Plugin::Test::NoTabs" => 0,
+    "Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable" => 0,
     "Dist::Zilla::Plugin::Test::Pod::LinkCheck" => 0,
     "Dist::Zilla::Plugin::Test::Pod::No404s" => 0,
     "Dist::Zilla::Plugin::Test::PodSpelling" => 0,
@@ -63,6 +64,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Role::PluginBundle::PluginRemover" => 0,
     "Moose" => 0,
     "Pod::Weaver::Section::Contributors" => 0,
+    "autodie" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -73,7 +75,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.11",
+  "VERSION" => "0.12",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -114,6 +116,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Plugin::Test::CPAN::Changes" => 0,
   "Dist::Zilla::Plugin::Test::Compile" => 0,
   "Dist::Zilla::Plugin::Test::NoTabs" => 0,
+  "Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable" => 0,
   "Dist::Zilla::Plugin::Test::Pod::LinkCheck" => 0,
   "Dist::Zilla::Plugin::Test::Pod::No404s" => 0,
   "Dist::Zilla::Plugin::Test::PodSpelling" => 0,
@@ -129,6 +132,7 @@ my %FallbackPrereqs = (
   "Moose" => 0,
   "Pod::Weaver::Section::Contributors" => 0,
   "Test::More" => "0.88",
+  "autodie" => 0,
   "strict" => 0,
   "warnings" => 0
 );
