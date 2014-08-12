@@ -20,7 +20,7 @@ name: Dist-Zilla-PluginBundle-DROLSKY
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.14'
+    version: '0.15'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::Plugin::Authority: '0'
@@ -73,7 +73,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.14'
+version: '0.15'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -391,31 +391,6 @@ x_Dist_Zilla:
       name: '@DROLSKY/Test::Synopsis'
       version: '2.000005'
     -
-      class: Dist::Zilla::Plugin::Git::Tag
-      config:
-        Dist::Zilla::Plugin::Git::Tag:
-          branch: ~
-          signed: 0
-          tag: v0.14
-          tag_format: v%v
-          tag_message: v%v
-          time_zone: local
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-      name: '@DROLSKY/Git::Tag'
-      version: '2.023'
-    -
-      class: Dist::Zilla::Plugin::Git::Push
-      config:
-        Dist::Zilla::Plugin::Git::Push:
-          push_to:
-            - origin
-          remotes_must_exist: 1
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-      name: '@DROLSKY/Git::Push'
-      version: '2.023'
-    -
       class: Dist::Zilla::Plugin::Git::Check
       config:
         Dist::Zilla::Plugin::Git::Check:
@@ -448,6 +423,31 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@DROLSKY/Git::Commit'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::Tag
+      config:
+        Dist::Zilla::Plugin::Git::Tag:
+          branch: ~
+          signed: 0
+          tag: v0.15
+          tag_format: v%v
+          tag_message: v%v
+          time_zone: local
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@DROLSKY/Git::Tag'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::Push
+      config:
+        Dist::Zilla::Plugin::Git::Push:
+          push_to:
+            - origin
+          remotes_must_exist: 1
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@DROLSKY/Git::Push'
       version: '2.023'
     -
       class: Dist::Zilla::Plugin::FinderCode

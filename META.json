@@ -98,7 +98,7 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::DROLSKY" : {
          "file" : "lib/Dist/Zilla/PluginBundle/DROLSKY.pm",
-         "version" : "0.14"
+         "version" : "0.15"
       }
    },
    "release_status" : "stable",
@@ -114,7 +114,7 @@
          "web" : "https://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY"
       }
    },
-   "version" : "0.14",
+   "version" : "0.15",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016003"
@@ -523,40 +523,6 @@
             "version" : "2.000005"
          },
          {
-            "class" : "Dist::Zilla::Plugin::Git::Tag",
-            "config" : {
-               "Dist::Zilla::Plugin::Git::Tag" : {
-                  "branch" : null,
-                  "signed" : 0,
-                  "tag" : "v0.14",
-                  "tag_format" : "v%v",
-                  "tag_message" : "v%v",
-                  "time_zone" : "local"
-               },
-               "Dist::Zilla::Role::Git::Repo" : {
-                  "repo_root" : "."
-               }
-            },
-            "name" : "@DROLSKY/Git::Tag",
-            "version" : "2.023"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Push",
-            "config" : {
-               "Dist::Zilla::Plugin::Git::Push" : {
-                  "push_to" : [
-                     "origin"
-                  ],
-                  "remotes_must_exist" : 1
-               },
-               "Dist::Zilla::Role::Git::Repo" : {
-                  "repo_root" : "."
-               }
-            },
-            "name" : "@DROLSKY/Git::Push",
-            "version" : "2.023"
-         },
-         {
             "class" : "Dist::Zilla::Plugin::Git::Check",
             "config" : {
                "Dist::Zilla::Plugin::Git::Check" : {
@@ -600,6 +566,40 @@
                }
             },
             "name" : "@DROLSKY/Git::Commit",
+            "version" : "2.023"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Tag",
+            "config" : {
+               "Dist::Zilla::Plugin::Git::Tag" : {
+                  "branch" : null,
+                  "signed" : 0,
+                  "tag" : "v0.15",
+                  "tag_format" : "v%v",
+                  "tag_message" : "v%v",
+                  "time_zone" : "local"
+               },
+               "Dist::Zilla::Role::Git::Repo" : {
+                  "repo_root" : "."
+               }
+            },
+            "name" : "@DROLSKY/Git::Tag",
+            "version" : "2.023"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Push",
+            "config" : {
+               "Dist::Zilla::Plugin::Git::Push" : {
+                  "push_to" : [
+                     "origin"
+                  ],
+                  "remotes_must_exist" : 1
+               },
+               "Dist::Zilla::Role::Git::Repo" : {
+                  "repo_root" : "."
+               }
+            },
+            "name" : "@DROLSKY/Git::Push",
             "version" : "2.023"
          },
          {

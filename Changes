@@ -1,3 +1,8 @@
+0.15     2014-08-12
+
+- Ordering fix take 2.
+
+
 0.14     2014-08-12
 
 - Hopefully fix an ordering issue with the Git plugins.
