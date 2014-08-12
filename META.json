@@ -98,7 +98,7 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::DROLSKY" : {
          "file" : "lib/Dist/Zilla/PluginBundle/DROLSKY.pm",
-         "version" : "0.13"
+         "version" : "0.14"
       }
    },
    "release_status" : "stable",
@@ -114,7 +114,7 @@
          "web" : "https://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY"
       }
    },
-   "version" : "0.13",
+   "version" : "0.14",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016003"
@@ -144,52 +144,6 @@
             "class" : "Dist::Zilla::Plugin::GatherDir",
             "name" : "@DROLSKY/GatherDir",
             "version" : "5.020"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Check",
-            "config" : {
-               "Dist::Zilla::Plugin::Git::Check" : {
-                  "untracked_files" : "die"
-               },
-               "Dist::Zilla::Role::Git::DirtyFiles" : {
-                  "allow_dirty" : [
-                     "Changes",
-                     "CONTRIBUTING.md",
-                     "README.md"
-                  ],
-                  "allow_dirty_match" : [],
-                  "changelog" : "Changes"
-               },
-               "Dist::Zilla::Role::Git::Repo" : {
-                  "repo_root" : "."
-               }
-            },
-            "name" : "@DROLSKY/Git::Check",
-            "version" : "2.023"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Commit",
-            "config" : {
-               "Dist::Zilla::Plugin::Git::Commit" : {
-                  "add_files_in" : [],
-                  "commit_msg" : "v%v%n%n%c",
-                  "time_zone" : "local"
-               },
-               "Dist::Zilla::Role::Git::DirtyFiles" : {
-                  "allow_dirty" : [
-                     "Changes",
-                     "CONTRIBUTING.md",
-                     "README.md"
-                  ],
-                  "allow_dirty_match" : [],
-                  "changelog" : "Changes"
-               },
-               "Dist::Zilla::Role::Git::Repo" : {
-                  "repo_root" : "."
-               }
-            },
-            "name" : "@DROLSKY/Git::Commit",
-            "version" : "2.023"
          },
          {
             "class" : "Dist::Zilla::Plugin::GitHub::Meta",
@@ -230,11 +184,6 @@
          {
             "class" : "Dist::Zilla::Plugin::NextRelease",
             "name" : "@DROLSKY/NextRelease",
-            "version" : "5.020"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::PruneFiles",
-            "name" : "@DROLSKY/PruneFiles",
             "version" : "5.020"
          },
          {
@@ -579,7 +528,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "v0.13",
+                  "tag" : "v0.14",
                   "tag_format" : "v%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -605,6 +554,52 @@
                }
             },
             "name" : "@DROLSKY/Git::Push",
+            "version" : "2.023"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Check",
+            "config" : {
+               "Dist::Zilla::Plugin::Git::Check" : {
+                  "untracked_files" : "die"
+               },
+               "Dist::Zilla::Role::Git::DirtyFiles" : {
+                  "allow_dirty" : [
+                     "Changes",
+                     "CONTRIBUTING.md",
+                     "README.md"
+                  ],
+                  "allow_dirty_match" : [],
+                  "changelog" : "Changes"
+               },
+               "Dist::Zilla::Role::Git::Repo" : {
+                  "repo_root" : "."
+               }
+            },
+            "name" : "@DROLSKY/Git::Check",
+            "version" : "2.023"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Commit",
+            "config" : {
+               "Dist::Zilla::Plugin::Git::Commit" : {
+                  "add_files_in" : [],
+                  "commit_msg" : "v%v%n%n%c",
+                  "time_zone" : "local"
+               },
+               "Dist::Zilla::Role::Git::DirtyFiles" : {
+                  "allow_dirty" : [
+                     "Changes",
+                     "CONTRIBUTING.md",
+                     "README.md"
+                  ],
+                  "allow_dirty_match" : [],
+                  "changelog" : "Changes"
+               },
+               "Dist::Zilla::Role::Git::Repo" : {
+                  "repo_root" : "."
+               }
+            },
+            "name" : "@DROLSKY/Git::Commit",
             "version" : "2.023"
          },
          {

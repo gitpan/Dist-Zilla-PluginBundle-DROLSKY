@@ -20,7 +20,7 @@ name: Dist-Zilla-PluginBundle-DROLSKY
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.13'
+    version: '0.14'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::Plugin::Authority: '0'
@@ -73,7 +73,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.13'
+version: '0.14'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -97,40 +97,6 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::GatherDir
       name: '@DROLSKY/GatherDir'
       version: '5.020'
-    -
-      class: Dist::Zilla::Plugin::Git::Check
-      config:
-        Dist::Zilla::Plugin::Git::Check:
-          untracked_files: die
-        Dist::Zilla::Role::Git::DirtyFiles:
-          allow_dirty:
-            - Changes
-            - CONTRIBUTING.md
-            - README.md
-          allow_dirty_match: []
-          changelog: Changes
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-      name: '@DROLSKY/Git::Check'
-      version: '2.023'
-    -
-      class: Dist::Zilla::Plugin::Git::Commit
-      config:
-        Dist::Zilla::Plugin::Git::Commit:
-          add_files_in: []
-          commit_msg: v%v%n%n%c
-          time_zone: local
-        Dist::Zilla::Role::Git::DirtyFiles:
-          allow_dirty:
-            - Changes
-            - CONTRIBUTING.md
-            - README.md
-          allow_dirty_match: []
-          changelog: Changes
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-      name: '@DROLSKY/Git::Commit'
-      version: '2.023'
     -
       class: Dist::Zilla::Plugin::GitHub::Meta
       name: '@DROLSKY/GitHub::Meta'
@@ -161,10 +127,6 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@DROLSKY/NextRelease'
-      version: '5.020'
-    -
-      class: Dist::Zilla::Plugin::PruneFiles
-      name: '@DROLSKY/PruneFiles'
       version: '5.020'
     -
       class: Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable
@@ -434,7 +396,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.13
+          tag: v0.14
           tag_format: v%v
           tag_message: v%v
           time_zone: local
@@ -452,6 +414,40 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@DROLSKY/Git::Push'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::Check
+      config:
+        Dist::Zilla::Plugin::Git::Check:
+          untracked_files: die
+        Dist::Zilla::Role::Git::DirtyFiles:
+          allow_dirty:
+            - Changes
+            - CONTRIBUTING.md
+            - README.md
+          allow_dirty_match: []
+          changelog: Changes
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@DROLSKY/Git::Check'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::Commit
+      config:
+        Dist::Zilla::Plugin::Git::Commit:
+          add_files_in: []
+          commit_msg: v%v%n%n%c
+          time_zone: local
+        Dist::Zilla::Role::Git::DirtyFiles:
+          allow_dirty:
+            - Changes
+            - CONTRIBUTING.md
+            - README.md
+          allow_dirty_match: []
+          changelog: Changes
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@DROLSKY/Git::Commit'
       version: '2.023'
     -
       class: Dist::Zilla::Plugin::FinderCode

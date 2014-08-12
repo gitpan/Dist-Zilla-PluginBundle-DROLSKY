@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.12-2-g767eacf
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.13';
+# git description: v0.13-2-g3c32394
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.14';
 
 use v5.10;
 
@@ -192,10 +192,8 @@ sub _build_plugins {
                 ),
             },
         ],
-        [ 'Git::Check'     => { allow_dirty => \@allow_dirty }, ],
-        [ 'Git::Commit'    => { allow_dirty => \@allow_dirty }, ],
-        [ 'GitHub::Meta'   => { bugs        => 0 }, ],
-        [ 'GitHub::Update' => { metacpan    => 1 }, ],
+        [ 'GitHub::Meta'          => { bugs         => 0 }, ],
+        [ 'GitHub::Update'        => { metacpan     => 1 }, ],
         [ MetaResources           => $self->_meta_resources(), ],
         [ 'MetaProvides::Package' => { meta_noindex => 1 }, ],
         [
@@ -298,6 +296,8 @@ sub _build_plugins {
             Git::Tag
             Git::Push
             ),
+        [ 'Git::Check'  => { allow_dirty => \@allow_dirty }, ],
+        [ 'Git::Commit' => { allow_dirty => \@allow_dirty }, ],
     );
 
     return \@plugins;
@@ -387,7 +387,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =for Pod::Coverage .*
 
