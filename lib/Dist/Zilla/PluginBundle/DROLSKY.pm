@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.11-2-g91ec656
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.12';
+# git description: v0.12-2-g767eacf
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.13';
 
 use v5.10;
 
@@ -40,7 +40,6 @@ use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
 use Dist::Zilla::Plugin::PromptIfStale;
-use Dist::Zilla::Plugin::PruneFiles;
 use Dist::Zilla::Plugin::ReadmeAnyFromPod;
 use Dist::Zilla::Plugin::SurgicalPodWeaver;
 use Dist::Zilla::Plugin::Test::CPAN::Changes;
@@ -77,7 +76,7 @@ has authority => (
     default => 'DROLSKY',
 );
 
-has prune_files => (
+has exclude_files => (
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
     required => 1,
@@ -159,14 +158,14 @@ sub mvp_multivalue_args {
 sub _build_plugins {
     my $self = shift;
 
-    my @prune_filename;
-    my @prune_match;
-    for my $prune ( @{ $self->prune_files() } ) {
-        if ( $prune =~ m{^[\w\-\./]+$} ) {
-            push @prune_filename, $prune;
+    my %exclude_filename = ( 'README.md' => 1 );
+    my @exclude_match;
+    for my $exclude ( @{ $self->exclude_files() } ) {
+        if ( $exclude =~ m{^[\w\-\./]+$} ) {
+            $exclude_filename{$exclude} = 1;
         }
         else {
-            push @prune_match, $prune;
+            push @exclude_match, $exclude;
         }
     }
 
@@ -185,11 +184,18 @@ sub _build_plugins {
                 : ()
             },
         ],
-        [ GatherDir        => { exclude_filename => 'README.md' }, ],
-        [ 'Git::Check'     => { allow_dirty      => \@allow_dirty }, ],
-        [ 'Git::Commit'    => { allow_dirty      => \@allow_dirty }, ],
-        [ 'GitHub::Meta'   => { bugs             => 0 }, ],
-        [ 'GitHub::Update' => { metacpan         => 1 }, ],
+        [
+            GatherDir => {
+                exclude_filename => [ keys %exclude_filename ],
+                (
+                    @exclude_match ? ( exclude_match => \@exclude_match ) : ()
+                ),
+            },
+        ],
+        [ 'Git::Check'     => { allow_dirty => \@allow_dirty }, ],
+        [ 'Git::Commit'    => { allow_dirty => \@allow_dirty }, ],
+        [ 'GitHub::Meta'   => { bugs        => 0 }, ],
+        [ 'GitHub::Update' => { metacpan    => 1 }, ],
         [ MetaResources           => $self->_meta_resources(), ],
         [ 'MetaProvides::Package' => { meta_noindex => 1 }, ],
         [
@@ -197,12 +203,6 @@ sub _build_plugins {
                       format => '%-'
                     . $self->next_release_width()
                     . 'v %{yyyy-MM-dd}d'
-            },
-        ],
-        [
-            PruneFiles => {
-                ( @prune_filename ? ( filename => \@prune_filename ) : () ),
-                ( @prune_match    ? ( match    => \@prune_match )    : () ),
             },
         ],
         [
@@ -387,7 +387,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =for Pod::Coverage .*
 

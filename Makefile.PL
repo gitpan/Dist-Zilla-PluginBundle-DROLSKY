@@ -47,7 +47,6 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::PodCoverageTests" => 0,
     "Dist::Zilla::Plugin::PodSyntaxTests" => 0,
     "Dist::Zilla::Plugin::PromptIfStale" => 0,
-    "Dist::Zilla::Plugin::PruneFiles" => 0,
     "Dist::Zilla::Plugin::ReadmeAnyFromPod" => 0,
     "Dist::Zilla::Plugin::SurgicalPodWeaver" => 0,
     "Dist::Zilla::Plugin::Test::CPAN::Changes" => 0,
@@ -75,7 +74,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.12",
+  "VERSION" => "0.13",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -110,7 +109,6 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Plugin::PodCoverageTests" => 0,
   "Dist::Zilla::Plugin::PodSyntaxTests" => 0,
   "Dist::Zilla::Plugin::PromptIfStale" => 0,
-  "Dist::Zilla::Plugin::PruneFiles" => 0,
   "Dist::Zilla::Plugin::ReadmeAnyFromPod" => 0,
   "Dist::Zilla::Plugin::SurgicalPodWeaver" => 0,
   "Dist::Zilla::Plugin::Test::CPAN::Changes" => 0,
