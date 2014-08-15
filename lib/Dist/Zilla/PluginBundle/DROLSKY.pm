@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.15-3-g5bfb543
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.16';
+# git description: v0.16-2-g3414fa5
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.17';
 
 use v5.10;
 
@@ -207,17 +207,17 @@ sub _build_plugins {
             'Test::Pod::Coverage::Configurable' => {
                 (
                     $self->_has_coverage_skip()
-                    ? ( skip => $self->coverage_skip() )
+                    ? ( skip => $self->pod_coverage_skip() )
                     : ()
                 ),
                 (
                     $self->_has_coverage_trustme()
-                    ? ( trustme => $self->coverage_trustme() )
+                    ? ( trustme => $self->pod_coverage_trustme() )
                     : ()
                 ),
                 (
                     $self->_has_coverage_class()
-                    ? ( class => $self->coverage_class() )
+                    ? ( class => $self->pod_coverage_class() )
                     : ()
                 ),
             },
@@ -387,7 +387,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.16
+version 0.17
 
 =for Pod::Coverage .*
 
