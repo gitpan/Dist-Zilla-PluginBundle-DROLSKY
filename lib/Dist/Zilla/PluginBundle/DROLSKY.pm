@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.14-3-g5202476
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.15';
+# git description: v0.15-3-g5bfb543
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.16';
 
 use v5.10;
 
@@ -92,13 +92,13 @@ has prereqs_skip => (
     },
 );
 
-has coverage_class => (
+has pod_coverage_class => (
     is        => 'ro',
     isa       => 'Str',
     predicate => '_has_coverage_class',
 );
 
-has coverage_skip => (
+has pod_coverage_skip => (
     traits   => ['Array'],
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
@@ -108,7 +108,7 @@ has coverage_skip => (
     },
 );
 
-has coverage_trustme => (
+has pod_coverage_trustme => (
     traits   => ['Array'],
     is       => 'ro',
     isa      => 'ArrayRef[Str]',
@@ -387,7 +387,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =for Pod::Coverage .*
 

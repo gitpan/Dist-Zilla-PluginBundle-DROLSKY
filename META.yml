@@ -20,7 +20,7 @@ name: Dist-Zilla-PluginBundle-DROLSKY
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.15'
+    version: '0.16'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::Plugin::Authority: '0'
@@ -73,7 +73,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.15'
+version: '0.16'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -139,7 +139,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::ReportPrereqs
       name: '@DROLSKY/Test::ReportPrereqs'
-      version: '0.018'
+      version: '0.019'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -162,11 +162,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@DROLSKY/ReadmeMarkdownInBuild'
-      version: '0.142180'
+      version: '0.142250'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@DROLSKY/ReadmeMarkdownInRoot'
-      version: '0.142180'
+      version: '0.142250'
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@DROLSKY/PruneCruft'
@@ -430,7 +430,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.15
+          tag: v0.16
           tag_format: v%v
           tag_message: v%v
           time_zone: local
