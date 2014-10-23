@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.17-3-g7e79a28
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.18';
+# git description: v0.18-6-g8a67184
 
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.19';
 use v5.10;
 
 use strict;
@@ -18,7 +18,6 @@ use Dist::Zilla::Plugin::Authority;
 use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::CheckPrereqsIndexed;
 use Dist::Zilla::Plugin::CopyReadmeFromBuild;
-use Dist::Zilla::Plugin::EOLTests;
 use Dist::Zilla::Plugin::Git::Check;
 use Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts;
 use Dist::Zilla::Plugin::Git::Commit;
@@ -37,13 +36,13 @@ use Dist::Zilla::Plugin::MetaResources;
 use Dist::Zilla::Plugin::MojibakeTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
-use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
 use Dist::Zilla::Plugin::PromptIfStale;
 use Dist::Zilla::Plugin::ReadmeAnyFromPod;
 use Dist::Zilla::Plugin::SurgicalPodWeaver;
 use Dist::Zilla::Plugin::Test::CPAN::Changes;
 use Dist::Zilla::Plugin::Test::Compile;
+use Dist::Zilla::Plugin::Test::EOL 0.14;
 use Dist::Zilla::Plugin::Test::NoTabs;
 use Dist::Zilla::Plugin::Test::Pod::Coverage::Configurable;
 use Dist::Zilla::Plugin::Test::Pod::LinkCheck;
@@ -200,7 +199,37 @@ sub _build_plugins {
             NextRelease => {
                       format => '%-'
                     . $self->next_release_width()
-                    . 'v %{yyyy-MM-dd}d'
+                    . 'v %{yyyy-MM-dd}d%{ (TRIAL RELEASE)}T'
+            },
+        ],
+        [
+            PkgVersion => {
+                die_on_existing_version => 1,
+                die_on_line_insertion   => 1,
+            },
+        ],
+        [
+            'Prereqs' => 'TestMoreDoneTesting' => {
+                -phase       => 'test',
+                -type        => 'requires',
+                'Test::More' => '0.88',
+            }
+        ],
+        [
+            'PromptIfStale' => 'stale modules, release' => {
+                phase             => 'release',
+                check_all_plugins => 1,
+                check_all_prereqs => 1,
+            }
+        ],
+        [
+            'ReadmeAnyFromPod' => 'ReadmeMarkdownInBuild' => {
+                filename => 'README.md',
+            },
+        ],
+        [
+            'ReadmeAnyFromPod' => 'ReadmeMarkdownInRoot' => {
+                filename => 'README.md',
             },
         ],
         [
@@ -226,30 +255,6 @@ sub _build_plugins {
             'Test::PodSpelling' => { stopwords => $self->_all_stopwords() },
         ],
         [ 'Test::ReportPrereqs' => { verify_prereqs => 1 }, ],
-        [
-            'Prereqs' => 'TestMoreDoneTesting' => {
-                -phase       => 'test',
-                -type        => 'requires',
-                'Test::More' => '0.88',
-            }
-        ],
-        [
-            'PromptIfStale' => 'stale modules, release' => {
-                phase             => 'release',
-                check_all_plugins => 1,
-                check_all_prereqs => 1,
-            }
-        ],
-        [
-            'ReadmeAnyFromPod' => 'ReadmeMarkdownInBuild' => {
-                filename => 'README.md',
-            },
-        ],
-        [
-            'ReadmeAnyFromPod' => 'ReadmeMarkdownInRoot' => {
-                filename => 'README.md',
-            },
-        ],
 
         # from @Basic
         qw(
@@ -276,14 +281,13 @@ sub _build_plugins {
             Meta::Contributors
             MetaConfig
             MetaJSON
-            PkgVersion
             SurgicalPodWeaver
             ),
         qw(
-            EOLTests
             PodSyntaxTests
             Test::CPAN::Changes
             Test::Compile
+            Test::EOL
             Test::NoTabs
             Test::Pod::LinkCheck
             Test::Pod::No404s
@@ -385,7 +389,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =for Pod::Coverage .*
 
