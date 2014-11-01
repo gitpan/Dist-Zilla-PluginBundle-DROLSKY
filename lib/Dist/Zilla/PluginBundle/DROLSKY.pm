@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.18-6-g8a67184
+# git description: v0.19-3-g5d03774
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.19';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.20';
 use v5.10;
 
 use strict;
@@ -37,6 +37,8 @@ use Dist::Zilla::Plugin::MojibakeTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodSyntaxTests;
+# SurgicalPodWeaver doesn't list its deps properly
+use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PromptIfStale;
 use Dist::Zilla::Plugin::ReadmeAnyFromPod;
 use Dist::Zilla::Plugin::SurgicalPodWeaver;
@@ -191,7 +193,12 @@ sub _build_plugins {
                 ),
             },
         ],
-        [ 'GitHub::Meta'          => { bugs         => 0 }, ],
+        [
+            'GitHub::Meta' => {
+                bugs     => 0,
+                homepage => 0,
+            },
+        ],
         [ 'GitHub::Update'        => { metacpan     => 1 }, ],
         [ MetaResources           => $self->_meta_resources(), ],
         [ 'MetaProvides::Package' => { meta_noindex => 1 }, ],
@@ -389,7 +396,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =for Pod::Coverage .*
 
