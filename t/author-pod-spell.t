@@ -22,9 +22,15 @@ DROLSKY
 DROLSKY's
 Rolsky
 Rolsky's
+ini
+mailmap
 Dave
 autarch
+David
 lib
 Dist
 Zilla
+Plugin
+Contributors
 PluginBundle
+License

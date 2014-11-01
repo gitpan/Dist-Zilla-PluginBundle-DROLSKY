@@ -13,6 +13,12 @@
       "version" : "2"
    },
    "name" : "Dist-Zilla-PluginBundle-DROLSKY",
+   "no_index" : {
+      "package" : [
+         "Dist::Zilla::Plugin::DROLSKY::Contributors",
+         "Dist::Zilla::Plugin::DROLSKY::License"
+      ]
+   },
    "prereqs" : {
       "configure" : {
          "requires" : {
@@ -35,6 +41,7 @@
       "runtime" : {
          "requires" : {
             "Dist::Zilla" : "0",
+            "Dist::Zilla::File::InMemory" : "0",
             "Dist::Zilla::Plugin::Authority" : "0",
             "Dist::Zilla::Plugin::AutoPrereqs" : "0",
             "Dist::Zilla::Plugin::CheckPrereqsIndexed" : "0",
@@ -73,10 +80,15 @@
             "Dist::Zilla::Plugin::Test::Portability" : "0",
             "Dist::Zilla::Plugin::Test::ReportPrereqs" : "0",
             "Dist::Zilla::Plugin::Test::Synopsis" : "0",
+            "Dist::Zilla::Role::AfterBuild" : "0",
+            "Dist::Zilla::Role::BeforeBuild" : "0",
+            "Dist::Zilla::Role::LicenseProvider" : "0",
             "Dist::Zilla::Role::PluginBundle::Easy" : "0",
             "Dist::Zilla::Role::PluginBundle::PluginRemover" : "0",
+            "Module::Runtime" : "0",
             "Moose" : "0",
             "Pod::Weaver::Section::Contributors" : "0",
+            "String::RewritePrefix" : "0",
             "autodie" : "0",
             "perl" : "v5.10.0",
             "strict" : "0",
@@ -99,7 +111,7 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::DROLSKY" : {
          "file" : "lib/Dist/Zilla/PluginBundle/DROLSKY.pm",
-         "version" : "0.20"
+         "version" : "0.21"
       }
    },
    "release_status" : "stable",
@@ -115,7 +127,7 @@
          "web" : "https://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY"
       }
    },
-   "version" : "0.20",
+   "version" : "0.21",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016003"
@@ -321,6 +333,16 @@
             "version" : "0.0019"
          },
          {
+            "class" : "Dist::Zilla::Plugin::DROLSKY::Contributors",
+            "name" : "@DROLSKY/DROLSKY::Contributors",
+            "version" : null
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::DROLSKY::License",
+            "name" : "@DROLSKY/DROLSKY::License",
+            "version" : null
+         },
+         {
             "class" : "Dist::Zilla::Plugin::Git::CheckFor::CorrectBranch",
             "config" : {
                "Dist::Zilla::Role::Git::Repo" : {
@@ -341,11 +363,6 @@
             "version" : "0.011"
          },
          {
-            "class" : "Dist::Zilla::Plugin::Git::Describe",
-            "name" : "@DROLSKY/Git::Describe",
-            "version" : "0.003"
-         },
-         {
             "class" : "Dist::Zilla::Plugin::Git::Contributors",
             "config" : {
                "Dist::Zilla::Plugin::Git::Contributors" : {
@@ -357,6 +374,11 @@
             },
             "name" : "@DROLSKY/Git::Contributors",
             "version" : "0.008"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Describe",
+            "name" : "@DROLSKY/Git::Describe",
+            "version" : "0.003"
          },
          {
             "class" : "Dist::Zilla::Plugin::InstallGuide",
@@ -420,21 +442,6 @@
                      {
                         "class" : "Pod::Weaver::Section::Generic",
                         "name" : "DESCRIPTION",
-                        "version" : "4.006"
-                     },
-                     {
-                        "class" : "Pod::Weaver::Section::Generic",
-                        "name" : "OVERVIEW",
-                        "version" : "4.006"
-                     },
-                     {
-                        "class" : "Pod::Weaver::Section::Collect",
-                        "name" : "ATTRIBUTES",
-                        "version" : "4.006"
-                     },
-                     {
-                        "class" : "Pod::Weaver::Section::Collect",
-                        "name" : "METHODS",
                         "version" : "4.006"
                      },
                      {
@@ -597,7 +604,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "v0.20",
+                  "tag" : "v0.21",
                   "tag_format" : "v%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -624,6 +631,11 @@
             },
             "name" : "@DROLSKY/Git::Push",
             "version" : "2.025"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::MetaNoIndex",
+            "name" : "MetaNoIndex",
+            "version" : "5.023"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",

@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.19-3-g5d03774
+# git description: v0.20-6-g043d9d2
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.20';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.21';
 use v5.10;
 
 use strict;
@@ -18,6 +18,8 @@ use Dist::Zilla::Plugin::Authority;
 use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::CheckPrereqsIndexed;
 use Dist::Zilla::Plugin::CopyReadmeFromBuild;
+use Dist::Zilla::Plugin::DROLSKY::Contributors;
+use Dist::Zilla::Plugin::DROLSKY::License;
 use Dist::Zilla::Plugin::Git::Check;
 use Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts;
 use Dist::Zilla::Plugin::Git::Commit;
@@ -280,10 +282,12 @@ sub _build_plugins {
         qw(
             CheckPrereqsIndexed
             CopyReadmeFromBuild
+            DROLSKY::Contributors
+            DROLSKY::License
             Git::CheckFor::CorrectBranch
             Git::CheckFor::MergeConflicts
-            Git::Describe
             Git::Contributors
+            Git::Describe
             InstallGuide
             Meta::Contributors
             MetaConfig
@@ -396,7 +400,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =for Pod::Coverage .*
 
@@ -406,7 +410,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2014 by Dave Rolsky.
+This software is Copyright (c) 2014 by David Rolsky.
 
 This is free software, licensed under:
 

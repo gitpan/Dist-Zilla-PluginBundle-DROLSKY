@@ -15,6 +15,8 @@ use Test::More 0.88;
 use Test::NoTabs;
 
 my @files = (
+    'lib/Dist/Zilla/Plugin/DROLSKY/Contributors.pm',
+    'lib/Dist/Zilla/Plugin/DROLSKY/License.pm',
     'lib/Dist/Zilla/PluginBundle/DROLSKY.pm',
     't/00-compile.t',
     't/00-report-prereqs.dd',
