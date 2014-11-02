@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.21-5-g5211796
+# git description: v0.22-2-g1dbbd22
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.22';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.23';
 use v5.10;
 
 use strict;
@@ -17,6 +17,7 @@ use Pod::Weaver::Section::Contributors;
 use Dist::Zilla::Plugin::Authority;
 use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::CheckPrereqsIndexed;
+use Dist::Zilla::Plugin::CopyFilesFromBuild;
 use Dist::Zilla::Plugin::CPANFile;
 use Dist::Zilla::Plugin::DROLSKY::Contributors;
 use Dist::Zilla::Plugin::DROLSKY::License;
@@ -420,7 +421,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =for Pod::Coverage .*
 

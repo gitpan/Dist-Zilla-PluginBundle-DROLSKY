@@ -46,6 +46,7 @@
             "Dist::Zilla::Plugin::AutoPrereqs" : "0",
             "Dist::Zilla::Plugin::CPANFile" : "0",
             "Dist::Zilla::Plugin::CheckPrereqsIndexed" : "0",
+            "Dist::Zilla::Plugin::CopyFilesFromBuild" : "0",
             "Dist::Zilla::Plugin::Git::Check" : "0",
             "Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts" : "0",
             "Dist::Zilla::Plugin::Git::Commit" : "0",
@@ -111,7 +112,7 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::DROLSKY" : {
          "file" : "lib/Dist/Zilla/PluginBundle/DROLSKY.pm",
-         "version" : "0.22"
+         "version" : "0.23"
       }
    },
    "release_status" : "stable",
@@ -127,7 +128,7 @@
          "web" : "https://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY"
       }
    },
-   "version" : "0.22",
+   "version" : "0.23",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016003"
@@ -618,7 +619,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "v0.22",
+                  "tag" : "v0.23",
                   "tag_format" : "v%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"

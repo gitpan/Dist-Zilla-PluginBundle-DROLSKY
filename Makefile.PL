@@ -27,6 +27,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::AutoPrereqs" => 0,
     "Dist::Zilla::Plugin::CPANFile" => 0,
     "Dist::Zilla::Plugin::CheckPrereqsIndexed" => 0,
+    "Dist::Zilla::Plugin::CopyFilesFromBuild" => 0,
     "Dist::Zilla::Plugin::Git::Check" => 0,
     "Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts" => 0,
     "Dist::Zilla::Plugin::Git::Commit" => 0,
@@ -81,7 +82,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.22",
+  "VERSION" => "0.23",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -95,6 +96,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Plugin::AutoPrereqs" => 0,
   "Dist::Zilla::Plugin::CPANFile" => 0,
   "Dist::Zilla::Plugin::CheckPrereqsIndexed" => 0,
+  "Dist::Zilla::Plugin::CopyFilesFromBuild" => 0,
   "Dist::Zilla::Plugin::Git::Check" => 0,
   "Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts" => 0,
   "Dist::Zilla::Plugin::Git::Commit" => 0,

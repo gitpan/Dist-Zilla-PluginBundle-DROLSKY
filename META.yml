@@ -24,7 +24,7 @@ no_index:
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.22'
+    version: '0.23'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::File::InMemory: '0'
@@ -32,6 +32,7 @@ requires:
   Dist::Zilla::Plugin::AutoPrereqs: '0'
   Dist::Zilla::Plugin::CPANFile: '0'
   Dist::Zilla::Plugin::CheckPrereqsIndexed: '0'
+  Dist::Zilla::Plugin::CopyFilesFromBuild: '0'
   Dist::Zilla::Plugin::Git::Check: '0'
   Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts: '0'
   Dist::Zilla::Plugin::Git::Commit: '0'
@@ -83,7 +84,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.22'
+version: '0.23'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -464,7 +465,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.22
+          tag: v0.23
           tag_format: v%v
           tag_message: v%v
           time_zone: local
