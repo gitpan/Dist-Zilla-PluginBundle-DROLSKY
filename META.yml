@@ -24,14 +24,14 @@ no_index:
 provides:
   Dist::Zilla::PluginBundle::DROLSKY:
     file: lib/Dist/Zilla/PluginBundle/DROLSKY.pm
-    version: '0.21'
+    version: '0.22'
 requires:
   Dist::Zilla: '0'
   Dist::Zilla::File::InMemory: '0'
   Dist::Zilla::Plugin::Authority: '0'
   Dist::Zilla::Plugin::AutoPrereqs: '0'
+  Dist::Zilla::Plugin::CPANFile: '0'
   Dist::Zilla::Plugin::CheckPrereqsIndexed: '0'
-  Dist::Zilla::Plugin::CopyReadmeFromBuild: '0'
   Dist::Zilla::Plugin::Git::Check: '0'
   Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts: '0'
   Dist::Zilla::Plugin::Git::Commit: '0'
@@ -83,7 +83,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-DROLSKY
   homepage: http://metacpan.org/release/Dist-Zilla-PluginBundle-DROLSKY
   repository: git://github.com/autarch/Dist-Zilla-PluginBundle-DROLSKY.git
-version: '0.21'
+version: '0.22'
 x_Dist_Zilla:
   perl:
     version: '5.016003'
@@ -104,11 +104,17 @@ x_Dist_Zilla:
       name: '@DROLSKY/AutoPrereqs'
       version: '5.023'
     -
+      class: Dist::Zilla::Plugin::CopyFilesFromBuild
+      name: '@DROLSKY/CopyFilesFromBuild'
+      version: '0.103510'
+    -
       class: Dist::Zilla::Plugin::GatherDir
       config:
         Dist::Zilla::Plugin::GatherDir:
           exclude_filename:
             - README.md
+            - cpanfile
+            - LICENSE
           exclude_match: []
           follow_symlinks: '0'
           include_dotfiles: '0'
@@ -168,7 +174,9 @@ x_Dist_Zilla:
           check_all_prereqs: '1'
           modules: []
           phase: release
-          skip: []
+          skip:
+            - Dist::Zilla::Plugin::DROLSKY::Contributors
+            - Dist::Zilla::Plugin::DROLSKY::License
       name: '@DROLSKY/stale modules, release'
       version: '0.028'
     -
@@ -240,9 +248,9 @@ x_Dist_Zilla:
       name: '@DROLSKY/CheckPrereqsIndexed'
       version: '0.012'
     -
-      class: Dist::Zilla::Plugin::CopyReadmeFromBuild
-      name: '@DROLSKY/CopyReadmeFromBuild'
-      version: '0.0019'
+      class: Dist::Zilla::Plugin::CPANFile
+      name: '@DROLSKY/CPANFile'
+      version: '5.023'
     -
       class: Dist::Zilla::Plugin::DROLSKY::Contributors
       name: '@DROLSKY/DROLSKY::Contributors'
@@ -420,7 +428,9 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::DirtyFiles:
           allow_dirty:
             - Changes
+            - cpanfile
             - CONTRIBUTING.md
+            - LICENSE
             - README.md
           allow_dirty_match: []
           changelog: Changes
@@ -438,7 +448,9 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::DirtyFiles:
           allow_dirty:
             - Changes
+            - cpanfile
             - CONTRIBUTING.md
+            - LICENSE
             - README.md
           allow_dirty_match: []
           changelog: Changes
@@ -452,7 +464,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.21
+          tag: v0.22
           tag_format: v%v
           tag_message: v%v
           time_zone: local
