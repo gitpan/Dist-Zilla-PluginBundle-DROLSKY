@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::DROLSKY::License;
-$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.23';
+$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.24';
 use v5.10;
 
 use strict;
@@ -33,7 +33,7 @@ sub provide_license {
 
     return $license_class->new(
         {
-            holder => 'David Rolsky',
+            holder => $args->{copyright_holder} || 'David Rolsky',
             year   => $years,
         },
     );
@@ -55,7 +55,7 @@ Dist::Zilla::Plugin::DROLSKY::License - Sets up default license and copyright ho
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =for Pod::Coverage .*
 

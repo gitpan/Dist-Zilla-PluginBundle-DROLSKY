@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.22-2-g1dbbd22
+# git description: v0.23-2-gb85ad52
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.23';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.24';
 use v5.10;
 
 use strict;
@@ -421,7 +421,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =for Pod::Coverage .*
 

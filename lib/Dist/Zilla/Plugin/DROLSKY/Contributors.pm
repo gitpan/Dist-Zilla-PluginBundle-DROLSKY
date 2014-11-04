@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::DROLSKY::Contributors;
-$Dist::Zilla::Plugin::DROLSKY::Contributors::VERSION = '0.23';
+$Dist::Zilla::Plugin::DROLSKY::Contributors::VERSION = '0.24';
 use v5.10;
 
 use strict;
@@ -89,7 +89,7 @@ Dist::Zilla::Plugin::DROLSKY::Contributors - Creates a weaver.ini and .mailmap t
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =for Pod::Coverage .*
 
