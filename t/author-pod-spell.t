@@ -26,7 +26,6 @@ ini
 mailmap
 Dave
 autarch
-David
 lib
 Dist
 Zilla

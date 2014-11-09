@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.23-2-gb85ad52
+# git description: v0.24-2-g92aeecd
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.24';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.25';
 use v5.10;
 
 use strict;
@@ -60,7 +60,8 @@ use Dist::Zilla::Plugin::Test::Synopsis;
 use Moose;
 
 with 'Dist::Zilla::Role::PluginBundle::Easy',
-    'Dist::Zilla::Role::PluginBundle::PluginRemover';
+    'Dist::Zilla::Role::PluginBundle::PluginRemover',
+    'Dist::Zilla::Role::PluginBundle::Config::Slicer';
 
 has dist => (
     is       => 'ro',
@@ -421,7 +422,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =for Pod::Coverage .*
 
@@ -431,7 +432,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2014 by David Rolsky.
+This software is Copyright (c) 2014 by Dave Rolsky.
 
 This is free software, licensed under:
 

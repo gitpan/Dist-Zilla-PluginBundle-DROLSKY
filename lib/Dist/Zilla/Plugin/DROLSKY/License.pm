@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::DROLSKY::License;
-$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.24';
+$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.25';
 use v5.10;
 
 use strict;
@@ -55,7 +55,7 @@ Dist::Zilla::Plugin::DROLSKY::License - Sets up default license and copyright ho
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =for Pod::Coverage .*
 
@@ -65,7 +65,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2014 by David Rolsky.
+This software is Copyright (c) 2014 by Dave Rolsky.
 
 This is free software, licensed under:
 
