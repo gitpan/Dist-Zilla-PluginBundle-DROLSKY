@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::DROLSKY::License;
-$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.25';
+$Dist::Zilla::Plugin::DROLSKY::License::VERSION = '0.26';
 use v5.10;
 
 use strict;
@@ -55,7 +55,7 @@ Dist::Zilla::Plugin::DROLSKY::License - Sets up default license and copyright ho
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =for Pod::Coverage .*
 

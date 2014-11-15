@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.24-2-g92aeecd
+# git description: v0.25-4-g1d540e4
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.25';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.26';
 use v5.10;
 
 use strict;
@@ -164,10 +164,13 @@ sub _build_plugins {
     my $self = shift;
 
     my %exclude_filename = map { $_ => 1 } qw(
+        Build.PL
         cpanfile
         LICENSE
+        Makefile.PL
         README.md
     );
+
     my @exclude_match;
     for my $exclude ( @{ $self->exclude_files() } ) {
         if ( $exclude =~ m{^[\w\-\./]+$} ) {
@@ -178,12 +181,11 @@ sub _build_plugins {
         }
     }
 
-    my @allow_dirty = qw(
-        Changes
-        cpanfile
-        CONTRIBUTING.md
-        LICENSE
-        README.md
+    my @allow_dirty = (
+        keys %exclude_filename, qw(
+            Changes
+            CONTRIBUTING.md
+            )
     );
 
     my @plugins     = (
@@ -202,7 +204,7 @@ sub _build_plugins {
         ],
         [
             CopyFilesFromBuild => {
-                copy => [qw( cpanfile LICENSE )],
+                copy => [qw( Build.PL cpanfile LICENSE Makefile.PL )],
             },
         ],
         [
@@ -422,7 +424,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =for Pod::Coverage .*
 
