@@ -1,3 +1,8 @@
+0.27     2014-12-20
+
+- Replace GatherDir and PruneCruft with Git::GatherDir.
+
+
 0.26     2014-11-15
 
 - The generated Makefile.PL or Build.PL file is now copied into the repo and

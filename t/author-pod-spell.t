@@ -31,5 +31,5 @@ Dist
 Zilla
 Plugin
 Contributors
-PluginBundle
 License
+PluginBundle

@@ -1,7 +1,7 @@
 package Dist::Zilla::PluginBundle::DROLSKY;
-# git description: v0.25-4-g1d540e4
+# git description: v0.26-3-g93f2a34
 
-$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.26';
+$Dist::Zilla::PluginBundle::DROLSKY::VERSION = '0.27';
 use v5.10;
 
 use strict;
@@ -26,6 +26,7 @@ use Dist::Zilla::Plugin::Git::CheckFor::MergeConflicts;
 use Dist::Zilla::Plugin::Git::Commit;
 use Dist::Zilla::Plugin::Git::Contributors;
 use Dist::Zilla::Plugin::Git::Describe;
+use Dist::Zilla::Plugin::Git::GatherDir;
 use Dist::Zilla::Plugin::Git::Push;
 use Dist::Zilla::Plugin::Git::Tag;
 use Dist::Zilla::Plugin::GitHub::Meta;
@@ -188,7 +189,7 @@ sub _build_plugins {
             )
     );
 
-    my @plugins     = (
+    my @plugins = (
         $self->make_tool(),
         [
             Authority => {
@@ -208,7 +209,7 @@ sub _build_plugins {
             },
         ],
         [
-            GatherDir => {
+            'Git::GatherDir' => {
                 exclude_filename => [ keys %exclude_filename ],
                 (
                     @exclude_match ? ( exclude_match => \@exclude_match ) : ()
@@ -291,7 +292,6 @@ sub _build_plugins {
 
         # from @Basic
         qw(
-            PruneCruft
             ManifestSkip
             MetaYAML
             License
@@ -424,7 +424,7 @@ Dist::Zilla::PluginBundle::DROLSKY - DROLSKY's plugin bundle
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =for Pod::Coverage .*
 
